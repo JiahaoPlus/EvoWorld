@@ -222,44 +222,17 @@ class UnifiedLoopConsistencyPipeline:
         sampling_method = "reprojection" if self.args.single_segment else "empty_with_traj"
         load_complete_episode = not self.args.single_segment
 
-        if self.args.dataset_name == "JHU":
-            from dataset.CameraTrajDataset_JHU import CameraTrajDataset
-            dataset = CameraTrajDataset(
-                data_root,
-                width=self.args.width,
-                height=self.args.height,
-                trajectory_file=None,
-                memory_sampling_args={"sampling_method": "empty_with_traj", "include_initial_frame": True},
-                load_complete_episode=load_complete_episode,
-                is_single_video=is_single_video,
-            )
-        elif self.args.dataset_name == "igenex":
-            from dataset.CameraTrajDataset_igenex import CameraTrajDataset
-            # override frames per segment for igenex
-            self.args.num_frames = 14
-            dataset = CameraTrajDataset(
-                data_root,
-                width=self.args.width,
-                height=self.args.height,
-                trajectory_file=None,
-                sequence_length=self.args.num_frames,
-                last_segment_length=self.args.num_frames,
-                memory_sampling_args={"sampling_method": "empty_with_traj", "include_initial_frame": True},
-                reprojection_name="rendered_panorama_vggt_open3d",
-                load_complete_episode=load_complete_episode,
-                is_single_video=is_single_video,
-            )
-        else:
-            from dataset.CameraTrajDataset import CameraTrajDataset
-            dataset = CameraTrajDataset(
-                data_root,
-                width=self.args.width,
-                height=self.args.height,
-                trajectory_file=None,
-                memory_sampling_args={"sampling_method": sampling_method, "include_initial_frame": True},
-                load_complete_episode=load_complete_episode,
-                is_single_video=is_single_video,
-            )
+        from dataset.CameraTrajDataset import CameraTrajDataset
+        dataset = CameraTrajDataset(
+            data_root,
+            width=self.args.width,
+            height=self.args.height,
+            trajectory_file=None,
+            memory_sampling_args={"sampling_method": sampling_method, "include_initial_frame": True},
+            load_complete_episode=load_complete_episode,
+            reprojection_name="rendered_panorama_vggt_open3d",
+            is_single_video=is_single_video,
+        )
 
         loader = torch.utils.data.DataLoader(dataset, batch_size=1, num_workers=0, shuffle=False)
         return dataset, loader
@@ -552,6 +525,7 @@ class UnifiedLoopConsistencyPipeline:
             os.makedirs(episode_save_dir, exist_ok=True)
             # ensure arg for process_batch
             self.args.mask_mem = False
+            self.logger.info("")
             process_batch(batch, self.args, pipeline, rays, weight_dtype, episode_save_dir, current_episode)
 
 

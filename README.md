@@ -24,12 +24,12 @@ conda install -c conda-forge "cudnn>=9,<10"
 
 ### Single-clip demo
 ```bash
-bash scripts/inference_single/test_evoworld_demo.sh
+bash run_single_segment.sh
 ```
 
 ### Long-horizon loop demo
 ```bash
-bash scripts/inference_multiple/loop_consistency_evoworld_demo.sh
+bash run_unified_pipeline.sh
 ```
 
 <!-- ## 🗺️ Spatial360 Dataset

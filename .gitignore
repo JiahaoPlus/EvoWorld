@@ -208,3 +208,7 @@ __marimo__/
 
 data/
 MODELS/
+
+*.onnx
+model_cache/*
+output

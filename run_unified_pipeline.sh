@@ -4,7 +4,7 @@
 # This script runs the unified pipeline that combines generation and reconstruction
 
 CKPT=MODELS/trained_deepspeed_o1_add_cam_plucker_add_mem_on_Curve_Loop_30000_3d_vggt_open3d_camera_aligned
-BASE_FOLDER=data/Curve_Loop/test/episode_0004
+BASE_FOLDER=example/case_000
 OUTPUT_ROOT=output
 SAVE_DIR=$OUTPUT_ROOT/$(basename $CKPT)/unified_demo_v2
 START_IDX=0
