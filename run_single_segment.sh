@@ -12,8 +12,6 @@ NUM_DATA_PER_GPU=1
 NUM_SEGMENTS=3
 CURVE_PATH=true
 
-source /scratch/ayuille1/jwang384/miniconda3/bin/activate evoworld
-
 echo "Running unified loop consistency pipeline..."
 echo "Checkpoint: $CKPT"
 echo "Base folder: $BASE_FOLDER"

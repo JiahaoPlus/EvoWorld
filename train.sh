@@ -1,7 +1,5 @@
 #!/bin/bash
 nvidia-smi
-# Activate the Python environment
-source /scratch/ayuille1/jwang384/miniconda3/bin/activate evoworld
 
 # configuration file, you can add more config files in the config folder
 CONFIG_NAME="deepspeed_o1_4gpu"
