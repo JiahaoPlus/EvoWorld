@@ -3,7 +3,7 @@
 W=1024
 H=576
 CKPT=MODELS/trained_deepspeed_o1_add_cam_plucker_add_mem_on_Curve_Loop_30000_3d_vggt_open3d_camera_aligned
-DATA=data/Curve_Loop/test/episode_0004
+DATA=example/case_000
 
 python -m evoworld.inference.forward_evoworld \
     --ckpt $CKPT \

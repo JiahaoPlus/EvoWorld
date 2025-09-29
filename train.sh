@@ -8,7 +8,7 @@ CONFIG_NAME="deepspeed_o1_4gpu"
 SEED=42
 
 # data settings
-DATASET_NAME="Curve_Loop"
+DATASET_NAME="Curve_Loop" # Coming Soon!
 WIDTH=1024
 HEIGHT=576
 NUM_FRAMES=25
@@ -30,10 +30,12 @@ BATCH_SIZE_PER_GPU=1
 GPUS_PER_NODE=$(nvidia-smi -L | wc -l)
 WORLD_SIZE=$((GPUS_PER_NODE * GRAD_ACCUM_STEP * BATCH_SIZE_PER_GPU))
 
-export WANDB_RUN_NAME="data-${DATASET_NAME}-lr-${LR}-step-${STEP}-bs-${BATCH_SIZE_PER_GPU}x${GPUS_PER_NODE}x${GRAD_ACCUM_STEP}-${CURRENT_TIME}"
-export WANDB_API_KEY='46e587ae4112a04da96b68ba807395204be787c9'
-export WANDB_ENTITY='lucassss'
-export WANDB_PROJECT='evoworld'
+
+# [Optional] use your own wandb with arg: --report_to wandb
+# export WANDB_RUN_NAME="data-${DATASET_NAME}-lr-${LR}-step-${STEP}-bs-${BATCH_SIZE_PER_GPU}x${GPUS_PER_NODE}x${GRAD_ACCUM_STEP}-${CURRENT_TIME}"
+# export WANDB_API_KEY=''
+# export WANDB_ENTITY=''
+# export WANDB_PROJECT='evoworld'
 
 for var in CONFIG_NAME SEED DATASET_NAME WIDTH HEIGHT NUM_FRAMES PRETRAIN_MODEL STEP SAVE_INTERVAL GRAD_ACCUM_STEP LR LR_WARMUP_STEP LR_SCHEDULER WORLD_SIZE PRECISION VALIDATION_STEP NUM_VALIDATION_IMAGES RESUME_FROM; do
     echo "$var: ${!var}"
@@ -65,7 +67,6 @@ accelerate launch --config_file="config/${CONFIG_NAME}.yaml" \
     --mixed_precision=$PRECISION \
     --validation_steps=$VALIDATION_STEP \
     --num_validation_images=$NUM_VALIDATION_IMAGES \
-    --report_to=wandb \
     --add_plucker \
     --resume_from_checkpoint=$RESUME_FROM \
     --push_to_hub \

@@ -39,7 +39,7 @@ We release **Spatial360**, the first dataset for long-range and loop-closure exp
 - Indoor: Habitat (HM3D and Matterport3D)
 - Real-world: Captured using Insta360 -->
 
-## 📦 Dataset Preparation
+<!-- ## 📦 Dataset Preparation
 
 ### Download Panoramic Videos and Camera Poses
 You can download pre-processed clips from the [Spatial360](https://github.com/todo) dataset:
@@ -50,9 +50,9 @@ gdown https://drive.google.com/uc?id=VIDEO_FILE_ID
 ### Download Pre-generated 3D Reprojections (Optional)
 ```bash
 gdown https://drive.google.com/uc?id=REPROJECTION_FILE_ID
-```
+``` -->
 
-### Or Generate Reprojections for Training
+<!-- ### Or Generate Reprojections for Training
 #### Step 1: Convert panoramic images to perspective views
 ```bash
 bash scripts/reprojection/pano_to_pers_for_train.sh
@@ -62,7 +62,7 @@ bash scripts/reprojection/pano_to_pers_for_train.sh
 This step uses VGGT [CVPR 2025] to build colored point clouds and Open3D for rendering.
 ```bash
 bash reproject_vggt_open3d_for_train_sbatch.sh
-```
+``` -->
 
 ## 🏋️ Training
 ```bash
