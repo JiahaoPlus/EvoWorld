@@ -1,7 +1,7 @@
 # EvoWorld
 
 **Official implementation of**  
-**[EvoWorld: Evolving Panoramic World Generation with Explicit 3D Memory](https://arxiv.org/abs/TODO)**  
+**[EvoWorld: Evolving Panoramic World Generation with Explicit 3D Memory](https://arxiv.org/abs/2510.01183)**  
 
 EvoWorld is a generative world model that explicitly reconstructs and utilizes a 3D memory for egocentric video generation. Starting from a single panoramic image and a sequence of camera poses, EvoWorld synthesizes future frames with strong 3D consistency by projecting an evolving 3D point cloud onto future views as conditioning for a video diffusion model.
 
