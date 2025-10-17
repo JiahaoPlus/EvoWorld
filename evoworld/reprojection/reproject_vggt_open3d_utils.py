@@ -193,7 +193,6 @@ class PointCloudProcessor:
             pred_world_points_conf = self._apply_sky_mask(
                 pred_world_points_conf, target_dir, image_subdir, only_render_last_24_frame
             )
-
         # Filter by frame selection
         if filter_by_frames != "all" and filter_by_frames != "All":
             selected_frame_idx = self._parse_frame_filter(filter_by_frames)

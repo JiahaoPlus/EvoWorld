@@ -134,7 +134,7 @@ def parse_arguments():
     parser.add_argument(
         "--conf_thres",
         type=float,
-        default=50.0,
+        default=30.0,
         help="Confidence threshold for predictions",
     )
     parser.add_argument(

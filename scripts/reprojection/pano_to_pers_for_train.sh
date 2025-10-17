@@ -1,12 +1,9 @@
 #!/bin/bash
 
-# Activate the Python environment
-source /scratch/ayuille1/jwang384/miniconda3/bin/activate evoworld
-echo $CONDA_DEFAULT_ENV
-echo $CONFIG_NAME
+export LD_LIBRARY_PATH="$CONDA_PREFIX/lib:$LD_LIBRARY_PATH"
 
 # Base directory containing episode folders.
-BASE_DIR="data/Segment_Loop/train"
+BASE_DIR="data/unity_curve/train"
 
 # Loop over every directory matching the pattern "episode_*".
 for EPISODE_PATH in "$BASE_DIR"/*; do

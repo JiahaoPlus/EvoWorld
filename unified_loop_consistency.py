@@ -123,8 +123,7 @@ class VGGTProcessor:
         # Load weights
         # Prefer a local cache if present; otherwise download once via hub.
         url = "https://huggingface.co/facebook/VGGT-1B/resolve/main/model.pt"
-        with LOGGER.catch_warnings():
-            state = torch.hub.load_state_dict_from_url(url, map_location=self.device)
+        state = torch.hub.load_state_dict_from_url(url, map_location=self.device)
         self.model.load_state_dict(state)
 
     @torch.inference_mode()
@@ -171,7 +170,7 @@ class UnifiedLoopConsistencyPipeline:
             num_frames=self.args.num_frames,
         )
 
-        if self.args.single_segment:
+        if not self.args.single_segment:
             self.logger.info("Loading VGGT model...")
             self.vggt = VGGTProcessor(self.device)
 
@@ -245,6 +244,7 @@ class UnifiedLoopConsistencyPipeline:
 
         current_path = batch["cam_traj"].to(self.device).squeeze(0)
         images = batch["pixel_values"]  # (B=1, T, C, H, W)
+        # Select memorized pixel values for this segment
 
         start_idx = segment_id * (self.args.num_frames - 1)
         end_idx = start_idx + self.args.num_frames
@@ -322,8 +322,10 @@ class UnifiedLoopConsistencyPipeline:
             else:
                 yaw_diff = 0.0
 
-            equi_img = cv2.cvtColor(frame_np, cv2.COLOR_RGB2BGR)
-            equi_img = np.transpose(equi_img, (2, 0, 1))  # CHW for Equi2Pers
+            # frame_np is RGB HWC (from PIL). Equi2Pers expects RGB CHW.
+            # Do NOT convert to BGR here (opencv uses BGR) otherwise channels
+            # will be swapped when Equi2Pers constructs perspective views.
+            equi_img = np.transpose(frame_np, (2, 0, 1))  # CHW for Equi2Pers (RGB)
             pers_img = self.equi2pers(equi=equi_img, rots={"pitch": 0, "roll": 0, "yaw": yaw_diff})
             pers_img = np.transpose(pers_img, (1, 2, 0))  # HWC
             perspective_frames.append(pers_img)
@@ -431,6 +433,10 @@ class UnifiedLoopConsistencyPipeline:
                 frames_path = os.path.join(episode_save_dir, f"predictions_{segment_id}")
                 start_idx_seg = segment_id * (self.args.num_frames - 1)
                 save_frames(generated_frames, frames_path, start_idx_seg)
+
+                frames_gt_path = os.path.join(episode_save_dir, f"predictions_gt_{segment_id}")
+                gt_frames = batch["pixel_values"][0, start_idx:end_idx]
+                save_frames(gt_frames, frames_gt_path, start_idx_seg)
 
             # For all but last segment: do reprojection + VGGT to build memories for next seg
             if segment_id < self.args.num_segments - 1:

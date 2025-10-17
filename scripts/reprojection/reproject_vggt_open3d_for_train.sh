@@ -1,18 +1,15 @@
 #!/bin/bash
+export LD_LIBRARY_PATH="$CONDA_PREFIX/lib:$LD_LIBRARY_PATH"
 
 DATA_FOLDER=$1
-SEGMENT_ID=$2
-CHUNK_ID=$3
-CHUNK_NUM=$4
+CHUNK_ID=$2
+CHUNK_NUM=$3
 
 SUB=perspective_look_at_center
 CAM=camera_poses_look_at_center.txt
-OUTPUT_SUBDIR=rendered_panorama_vggt_open3d_camera_aligned
+OUTPUT_SUBDIR=rendered_panorama_vggt_open3d_camera_aligned_new_code
 
-# Activate the Python environment
-source /scratch/ayuille1/jwang384/miniconda3/bin/activate evoworld
-
-python demo_slurm_open3d_with_camera.py \
+python -m evoworld.reprojection.reproject_vggt_open3d \
     --data_folder $DATA_FOLDER \
     --image_subdir $SUB \
     --no_mask_sky \

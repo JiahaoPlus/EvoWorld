@@ -240,3 +240,7 @@ zipp==3.21.0
 Pillow
 huggingface_hub
 onnxruntime-gpu
+# Google Drive API dependencies
+# google-auth-oauthlib
+# google-auth-httplib2
+# google-api-python-client

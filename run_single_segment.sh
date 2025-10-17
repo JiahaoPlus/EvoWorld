@@ -3,7 +3,10 @@
 # Unified Loop Consistency Pipeline Runner
 # This script runs the unified pipeline that combines generation and reconstruction
 
-CKPT=MODELS/trained_deepspeed_o1_add_cam_plucker_add_mem_on_Curve_Loop_30000_3d_vggt_open3d_camera_aligned
+# link to correct cudnn and cuda
+export LD_LIBRARY_PATH="$CONDA_PREFIX/lib:$LD_LIBRARY_PATH"
+
+CKPT=MODELS/evoworld_curve_unity
 BASE_FOLDER=example/case_000
 OUTPUT_ROOT=output
 SAVE_DIR=$OUTPUT_ROOT/$(basename $CKPT)/unified_single_demo
