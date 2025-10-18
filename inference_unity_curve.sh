@@ -7,7 +7,7 @@
 export LD_LIBRARY_PATH="$CONDA_PREFIX/lib:$LD_LIBRARY_PATH"
 
 CKPT=MODELS/evoworld_curve_unity
-BASE_FOLDER=data/Curve_Loop
+BASE_FOLDER=data/unity_curve
 OUTPUT_ROOT=output
 SAVE_DIR=$OUTPUT_ROOT/$(basename $CKPT)/eval_unity_curve
 START_IDX=0

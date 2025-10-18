@@ -1,3 +1,4 @@
+
 # EvoWorld
 
 **Official implementation of**  
@@ -9,7 +10,61 @@ EvoWorld is a generative world model that explicitly reconstructs and utilizes a
   <img src="assets/overview.png" alt="EvoWorld Pipeline Overview" width="70%">
 </p>
 
-## 🔧 Installation
+## � Installation
+
+```bash
+git clone git@github.com:JiahaoPlus/EvoWorld.git --recursive
+cd evoworld
+conda create -n evoworld python=3.11
+conda activate evoworld
+pip install -r requirements.txt
+conda install -c conda-forge "cudnn>=9,<10"
+```
+
+## 📦 Released Models & Datasets
+
+We have released:
+
+- **Model weights trained on Unity Curve Path (subset):**
+  [Evoworld_Unity_Curve_Path (Hugging Face)](https://huggingface.co/CometsFeiyu/Evoworld_Unity_Curve_Path)
+- **Corresponding dataset:**
+  [Google Drive link](https://drive.google.com/file/d/1xkVi83huO7WkRm6_XZ9AXJEhjvVmux0q/view?usp=drive_link)
+
+
+### How to use
+
+**1. Download model weights and dataset**
+  - Download model weights from Hugging Face and place in the `MODELS` directory.
+  - Download the dataset from Google Drive.
+  - **After downloading the dataset, extract it:**
+    ```bash
+    tar xvf path/to/dataset.tar
+    ```
+  - Update the model path in `run_single_segment.sh` and `run_unified_pipeline.sh` to point to your downloaded weights.
+
+**2. Run model on provided example**
+   - For **single clip generation**, run:
+     ```bash
+     bash run_single_segment.sh
+     ```
+   - For **3-clip iterative generation**, run:
+     ```bash
+     bash run_unified_pipeline.sh
+     ```
+   - Make sure the model path in these scripts matches your downloaded weights.
+
+**3. Run model across the whole test set**
+   - Change your model path in `inference_unity_curve.sh` to the downloaded weights.
+   - Execute:
+     ```bash
+     bash inference_unity_curve.sh
+     ```
+
+**4. Get evaluation metrics**
+   - Run:
+     ```bash
+     bash calculate_metrics.sh
+     ```
 
 ```bash
 git clone git@github.com:JiahaoPlus/EvoWorld.git --recursive
