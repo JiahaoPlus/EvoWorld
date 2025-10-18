@@ -10,18 +10,31 @@ EvoWorld is a generative world model that explicitly reconstructs and utilizes a
   <img src="assets/overview.png" alt="EvoWorld Pipeline Overview" width="70%">
 </p>
 
-## � Installation
+## Table of Contents
+
+- 🔧 Installation
+- 📦 Pretrained Weights & Dataset
+- ⚡ Quickstart
+  - Single-clip generation
+  - 3-clip iterative generation
+- 🧪 Inference (full test set)
+- 📊 Evaluation
+- 🏋️ Training
+- 🗺️ Spatial360 Dataset
+- 📎 Acknowledgements
+
+## 🔧 Installation
 
 ```bash
 git clone git@github.com:JiahaoPlus/EvoWorld.git --recursive
-cd evoworld
+cd EvoWorld
 conda create -n evoworld python=3.11
 conda activate evoworld
 pip install -r requirements.txt
 conda install -c conda-forge "cudnn>=9,<10"
 ```
 
-## 📦 Released Models & Datasets
+## 📦 Pretrained Weights & Dataset
 
 We have released:
 
@@ -34,13 +47,13 @@ We have released:
 ### How to use
 
 **1. Download model weights and dataset**
-  - Download model weights from Hugging Face and place in the `MODELS` directory.
-  - Download the dataset from Google Drive.
-  - **After downloading the dataset, extract it:**
-    ```bash
-    tar xvf path/to/dataset.tar
-    ```
-  - Update the model path in `run_single_segment.sh` and `run_unified_pipeline.sh` to point to your downloaded weights.
+- Download model weights from Hugging Face and place them in the `MODELS/` directory.
+- Download the dataset from Google Drive.
+- After downloading the dataset, extract it (adjust paths as needed):
+  ```bash
+  tar -xvf /path/to/dataset.tar -C data/
+  ```
+- Update the model path in `run_single_segment.sh` and `run_unified_pipeline.sh` to point to your downloaded weights.
 
 **2. Run model on provided example**
    - For **single clip generation**, run:
@@ -51,7 +64,7 @@ We have released:
      ```bash
      bash run_unified_pipeline.sh
      ```
-   - Make sure the model path in these scripts matches your downloaded weights.
+  - Make sure the model path in these scripts matches your downloaded weights in `MODELS/`.
 
 **3. Run model across the whole test set**
    - Change your model path in `inference_unity_curve.sh` to the downloaded weights.
@@ -66,18 +79,26 @@ We have released:
      bash calculate_metrics.sh
      ```
 
+## ⚡ Quickstart
+
+### Single-clip generation (one clip)
 ```bash
-git clone git@github.com:JiahaoPlus/EvoWorld.git --recursive
-cd evoworld
-conda create -n evoworld python=3.11
-conda activate evoworld
-pip install -r requirements.txt
-conda install -c conda-forge "cudnn>=9,<10"
+bash run_single_segment.sh
 ```
+
+### 3-clip iterative generation (memory carried across 3 clips)
+```bash
+bash run_unified_pipeline.sh
+```
+
+Notes:
+- `run_single_segment.sh` runs a single-clip example.
+- `run_unified_pipeline.sh` runs three clips iteratively, reusing the evolving 3D memory.
+- Ensure the model path inside these scripts points to your downloaded weights in `MODELS/`.
 
 ## 🗺️ Spatial360 Dataset
 
-We have release unity curve path subset--Remaining subset is coming soon!
+We have released the Unity Curve Path subset — remaining subsets are coming soon!
 
 <!-- ## 🗺️ Spatial360 Dataset
 
@@ -112,10 +133,24 @@ bash reproject_vggt_open3d_for_train_sbatch.sh
 ``` -->
 
 ## 🏋️ Training
-To reproduce our performance, run train script:
+To reproduce our performance, run the train script:
 ```bash
 # Train EvoWorld
 bash train.sh
+```
+
+## 🧪 Inference (full test set)
+
+Update your model path in `inference_unity_curve.sh` and run:
+```bash
+bash inference_unity_curve.sh
+```
+
+## 📊 Evaluation
+
+Compute evaluation metrics on the outputs:
+```bash
+bash calculate_metrics.sh
 ```
 
 ## 📎 Acknowledgements
