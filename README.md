@@ -75,21 +75,9 @@ pip install -r requirements.txt
 conda install -c conda-forge "cudnn>=9,<10"
 ```
 
-## 🎬 Demo
-
-### Single-clip demo
-```bash
-bash run_single_segment.sh
-```
-
-### Long-horizon loop demo
-```bash
-bash run_unified_pipeline.sh
-```
-
 ## 🗺️ Spatial360 Dataset
 
-Comming soon
+We have release unity curve path subset--Remaining subset is coming soon!
 
 <!-- ## 🗺️ Spatial360 Dataset
 
@@ -124,21 +112,10 @@ bash reproject_vggt_open3d_for_train_sbatch.sh
 ``` -->
 
 ## 🏋️ Training
+To reproduce our performance, run train script:
 ```bash
 # Train EvoWorld
 bash train.sh
-```
-
-## 🧪 Inference
-
-### 1. Single-clip generation
-```bash
-sbatch scripts/inference_single/test_evoworld_batch.sh
-```
-
-### 2. Long-horizon loop consistency generation
-```bash
-sbatch scripts/inference_multiple/loop_consistency_evoworld.sh
 ```
 
 ## 📎 Acknowledgements
