@@ -38,10 +38,10 @@ conda install -c conda-forge "cudnn>=9,<10"
 
 We have released:
 
-- **Model weights trained on Unity Curve Path (subset):**
-  [Evoworld_Unity_Curve_Path (Hugging Face)](https://huggingface.co/CometsFeiyu/Evoworld_Unity_Curve_Path)
-- **Corresponding dataset:**
-  [Google Drive link](https://drive.google.com/file/d/1xkVi83huO7WkRm6_XZ9AXJEhjvVmux0q/view?usp=drive_link)
+- **Model weights (Hugging Face):**
+  [Evoworld_Unity_Curve_Path](https://huggingface.co/CometsFeiyu/Evoworld_Unity_Curve_Path)
+- **Corresponding dataset (Google Drive):**
+  [Unity_Curve_Path_Data](https://drive.google.com/file/d/1xkVi83huO7WkRm6_XZ9AXJEhjvVmux0q/view?usp=drive_link), [UE5_Curve_Path_Data](https://drive.google.com/drive/folders/1XYwHZqbcn8sn1xfIyHTp3_a2aOCNPVPe?usp=drive_link)
 
 
 ### How to use
@@ -98,7 +98,7 @@ Notes:
 
 ## 🗺️ Spatial360 Dataset
 
-We have released the Unity Curve Path subset — remaining subsets are coming soon!
+We have released the Unity Curve Path and UE5 Curve Path subset — remaining subsets are coming soon!
 
 <!-- ## 🗺️ Spatial360 Dataset
 
